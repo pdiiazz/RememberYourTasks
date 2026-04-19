@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="src/assets/favicon.webp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/style.css">
+    <title>Remember your tasks!</title>
+  </head>
+  <body>
+    <!-- Sección principal de la aplicación -->
+    <section id="tareas">
+      <h1>Remember your tasks!</h1>
+      <p>¡Mantén tus ideas ordenadas, que en la mente se pierden!</p>
+      
+      <div id="container">
+        <!-- Formulario para agregar tareas -->
+        <article id="wishForm">
+          <h2>Introduce los detalles de la tarea: </h2>
+          <!-- Inputs usados para recolectar información de las tareas -->
+          <input type="text" id="taskInputTitle" placeholder="Ponle título...">
+          <textarea name="task" id="taskInputDescription" placeholder="Escribe una breve descripción..."></textarea>
+
+          <!-- Botones para agregar tareas y limpiar la lista -->
+          <div id="buttonContainer">
+            <button id="addWishButton">Agregar Tarea</button>
+            <button id="clearWishesButton">Limpia Lista</button>
+          </div>
+        </article>
+
+        <!-- Lista de tareas, con el DOM se añaden los elementos a esta-->
+        <article id="wishesList">
+          <h2>Tus tareas:</h2>
+        </article>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
