@@ -51,7 +51,7 @@ addWishButton.addEventListener('click', (e) => {
   // Añade el objeto de desea al array de deseos
   wishListArray.push(wish);
 
-  console.log(wish.idGenerator); // Para ver el ID generado en la consola (va subiendo el contador)
+  console.log(wish); // Para ver el ID generado en la consola (va subiendo el contador)
 
   stylesAndCreate(wish); 
 
