@@ -8,8 +8,12 @@ let addWishButton = document.querySelector('#addWishButton');
 let clearWishesButton = document.querySelector('#clearWishesButton');
 let wishList = document.querySelector('#wishesList');
 
-let idGenerator = 0; // Generador de ID para cada objeto de tarea.
-let wishListArray = []; // Array para guardar los objetos de tarea.
+let idGenerator = 1; // Generador de ID para cada objeto de tarea.
+
+// Deserializar JSON a objetos para la lista de los deseos/tareas.
+let wishListArray = JSON.parse(localStorage.getItem('wishes')) || [];
+wishListArray.forEach(wish => stylesAndCreate(wish));
+
 
 // Esquema JSON para validar los objetos de tarea.
 const esquemaWish = {
@@ -55,6 +59,9 @@ addWishButton.addEventListener('click', (e) => {
 
   stylesAndCreate(wish); 
 
+  // Una vez creado el "contenedor" pasamos los deseos a local storage en formato JSON con la clave "wishes"
+  localStorage.setItem('wishes', JSON.stringify(wishListArray));
+
   title.value = '';
   description.value = '';
 });
@@ -74,6 +81,10 @@ clearWishesButton.addEventListener('click', (e) => {
     items.forEach(item => {
         wishList.removeChild(item);
     });
+
+    // Borramos el contenido de la lista poniendola otra vez vacía y borramos del local storage también toda la lista con clave "wishes"
+    wishListArray = [];
+    localStorage.removeItem('wishes');
 });
 
 // Función para crear los elementos de cada tarea y aplicar estilos
@@ -120,6 +131,10 @@ function stylesAndCreate(wish) {
     // Listener para eliminar el hijo de la lista de tareas
     deleteButton.addEventListener('click', () => {
         wishList.removeChild(wishItem);
+
+        // Ignorando el tipo de dato, extraemos de la lista todos los objetos diferentes al seleccionado, para así recomponer el local storage borrando el objeto eliminado.
+        wishListArray = wishListArray.filter(wishObj => wishObj.idGenerator !== wish.idGenerator);
+        localStorage.setItem('wishes', JSON.stringify(wishListArray));
     });
 
     // Se añade el botón de eliminar al contenedor de la tarea
